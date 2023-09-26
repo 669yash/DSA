@@ -20,6 +20,7 @@ class sll{
 		}
 		void create();
 		void disp();
+		void insert();
 };
 
 void sll::create(){
@@ -67,19 +68,38 @@ void sll::disp(){
 	}
 }
 
+void sll::insert(){
+	char positem;
+	cout<<"Enter the item name after which you want to insert"<<endl;
+	cin>>positem;
+	if(temp)
+}
+
 int main(){
-	int choice;
+	int choice, cho;
 	
 	sll s;
 	
 	cout<<"Billing management system"<<endl;
 	cout<<"Menu"<<endl;
 	
-		cout<<"Enter your choice \n1.Create entry \n2.Insert entry \n3.Delete entry \n4.Update \n5.Search \n6.Sort \n7.Reverse \n8.Concatinate"<<endl;
-		s.create();
-		s.disp();
+	cout<<"Enter your choice \n1.Create entry \n2.Insert entry \n3.Delete entry \n4.Update \n5.Search \n6.Sort \n7.Reverse \n8.Concatinate"<<endl;
+	cin>>choice;
 	
-return 0;
+	do{
+	switch(choice){
+		case 1:
+			s.create();
+			s.disp();
+			break;
+		
+		case 2:
+			break;
+			
+}
+	cout<<"Do you want to perform any other operation y/n"<<endl;
+	cin>>cho;
+    }while(cho=='y');
 	
-	
+return 0;	
 }
