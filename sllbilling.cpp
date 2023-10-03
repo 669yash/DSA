@@ -1,4 +1,5 @@
 #include<iostream>
+#include<cstring>
 
 using namespace std;
 
@@ -21,6 +22,7 @@ class sll{
 		void create();
 		void disp();
 		void insert();
+		void del();
 };
 
 void sll::create(){
@@ -69,14 +71,62 @@ void sll::disp(){
 }
 
 void sll::insert(){
+	node *temp = new node;
+	cout << "Enter item name for insertion: ";
+    cin >> temp->itemname;
+    cout << "Enter quantity: ";
+    cin >> temp->quantity;
+    cout << "Enter price: ";
+    cin >> temp->price;
+    temp->total_price = temp->quantity * temp->price;
+	
 	char positem;
 	cout<<"Enter the item name after which you want to insert"<<endl;
 	cin>>positem;
-	if(temp)
+	//if(temp)
 }
 
+void sll::del(){
+	if (head == NULL) {
+        cout << "List is empty. Nothing to delete." << endl;
+        return;
+    }
+
+    char del_item[50];
+    cout << "Enter the item name to delete: ";
+    cin >> del_item;
+
+    node* temp = head;
+    node* prev = NULL;
+
+    // Search for the target item
+    while (temp != NULL && strcmp(temp->itemname, del_item) != 0) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    if (temp == NULL) {
+        cout << "Item not found. No deletion performed." << endl;
+    }
+    else {
+        if (prev == NULL) {
+            // If the item to be deleted is the first node
+            head = temp->next;
+        }
+        else {
+            prev->next = temp->next;
+        }
+
+        delete temp;
+        cout << "Item '" << del_item << "' deleted successfully." << endl;
+    }
+}
+
+
 int main(){
-	int choice, cho;
+	char cho;
+	do{
+	int choice;
 	
 	sll s;
 	
@@ -86,7 +136,6 @@ int main(){
 	cout<<"Enter your choice \n1.Create entry \n2.Insert entry \n3.Delete entry \n4.Update \n5.Search \n6.Sort \n7.Reverse \n8.Concatinate"<<endl;
 	cin>>choice;
 	
-	do{
 	switch(choice){
 		case 1:
 			s.create();
@@ -94,6 +143,13 @@ int main(){
 			break;
 		
 		case 2:
+			s.insert();
+			s.disp();
+			break;
+		
+		case 3:
+			s.del();
+			s.disp();
 			break;
 			
 }
