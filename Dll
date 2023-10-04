@@ -1,30 +1,31 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
 
-class node {
-public:
-    int roll_no;
-    float marks;
-    node* next;
-    node* prev;
+class node{
+	public:
+		int roll_no;
+		float marks;
+		node *next;
+		node *prev;
 };
 
-class marklist {
-public:
-    node* head;
-    marklist() {
-        head = NULL;
-    }
-    int create();
-    void disp();
-    // void sort(int c);
-    // void merge(marklist l1, marklist l2)
+class marklist{
+	public:
+		node *head;
+	    marklist(){
+	    	head=NULL;
+	    }
+	    int create();
+	    void disp();
+	    void sort(int count);
+	    node* swap(node* p1, node* p2);
+	    void merge(marklist l1 ,marklist l2);
 };
 
-int marklist::create() {
-    node* temp;
+int marklist::create(){
+	node* temp;
     char ch;
-    int len = 0; // Initialize len to 0
+    int len = 0; 
     do {
         temp = new node();
         cout << "Enter roll no" << endl;
@@ -41,15 +42,15 @@ int marklist::create() {
             head->prev = temp;
             head = temp;
         }
-        cout << "Do you want to add more nodes Y/N" << endl;
-        cin >> ch;
+        cout<<"Do you want to add more nodes: (y/n)"<<endl;
+        cin>>ch;
         len++;
-    } while (ch == 'Y'); 
-    return len;
+    }while(ch=='y');
+	return len;
 }
 
-void marklist::disp() {
-    node* p;
+void marklist::disp(){
+	node* p;
     p = head;
     cout << "ROLL NO"
          << "\t\t"
@@ -59,38 +60,8 @@ void marklist::disp() {
         p = p->next;
     }
 }
-void marklist :: sort(int count)
-{
-    node **h;
-    int i,j,swapped;
-    for(i=0;i<count<<i++){
-        h=&(head);
-        swapped=0;}
-        for(j=0;)
 
-    }
-    
-    for
-}
-
-int main() {
-    marklist l1, l2; 
-
-    cout << "Creating marklist l1" << endl;
-    int len1 = l1.create();
-
-    cout << "Displaying marklist l1" << endl;
-    l1.disp();
-
-    cout << "Creating marklist l2" << endl;
-    int len2 = l2.create();
-
-    cout << "Displaying marklist l2" << endl;
-    l2.disp();
-
-    return 0;
-}
-void Marklist::sort(int count) {
+void marklist::sort(int count) {
     node** h;
     int i, j, swapped;
     for (i = 0; i < count; i++) {
@@ -111,4 +82,97 @@ void Marklist::sort(int count) {
             break;
         }
     }
+}
+
+node* marklist::swap(node* p1, node* p2) {
+    if (p1 == NULL || p2 == NULL)
+        return NULL;
+
+    if (p1->prev != NULL)
+        p1->prev->next = p2;
+    else
+        head = p2;
+
+    if (p2->next != NULL)
+        p2->next->prev = p1;
+
+    node* temp = p2->next;
+    p2->next = p1->next;
+    p1->next = temp;
+
+    temp = p1->prev;
+    p1->prev = p2->prev;
+    p2->prev = temp;
+
+    return p2;
+}
+
+marklist marklist::merge(marklist l1, marklist l2){
+	node *p = l1.head;
+	node *q = l2.head;
+	node *r;
+	marklist l3;
+	if(p==NULL){
+		l3.head=q;
+		return l3;
+	}
+	if(q==NULL){
+		l3.head=p;
+		return l3;
+	}
+	if(p!=NULL && q!=NULL){
+		if(p->marks<q->marks){
+			r=p;
+			p=p->next;
+		}
+		else{
+			r=q;
+			q=q->next;
+		}
+		l3.head=r;
+	}
+	while(p!=NULL && q!=NULL)
+	{
+		if(p->marks < q->marks){
+			r->next=p;
+			p->prev=r;
+			r=p;
+		}
+		else(){
+			r->next=p;
+			q->prev=r;
+			r=q;
+			q=q-next;
+		}
+	if(p==NULL){
+		r->next=q;
+		q->prev=r;
+		return l3;
+	}	
+	if(q==NULL){
+		r->next=p;
+		p->prev=r;
+		return l3;
+	}
+	}
+}
+
+int main(){
+	marklist l1, l2;
+	int len1, len2;
+	
+	cout<<"Creating marklist 1:"<<endl;
+	len1=l1.create();
+	
+	cout<<"Displaying marklist 1:"<<endl;
+	l1.disp();
+	
+	cout << "Creating marklist l2" << endl;
+    len2 = l2.create();
+
+    cout << "Displaying marklist l2" << endl;
+    l2.disp();
+	
+	
+	return 0;
 }
