@@ -1,0 +1,92 @@
+#include <iostream>
+using namespace std;
+
+class node {
+public:
+    int roll_no;
+    float marks;
+    node* next;
+    node* prev;
+};
+
+class marklist {
+public:
+    node* head;
+    marklist() {
+        head = NULL;
+    }
+    int create();
+    void disp();
+    // void sort(int c);
+    // void merge(marklist l1, marklist l2)
+};
+
+int marklist::create() {
+    node* temp;
+    char ch;
+    int len = 0; // Initialize len to 0
+    do {
+        temp = new node();
+        cout << "Enter roll no" << endl;
+        cin >> temp->roll_no;
+        cout << "Enter Marks" << endl;
+        cin >> temp->marks;
+        temp->next = NULL;
+        temp->prev = NULL;
+        if (head == NULL) {
+            head = temp;
+        }
+        else {
+            temp->next = head;
+            head->prev = temp;
+            head = temp;
+        }
+        cout << "Do you want to add more nodes Y/N" << endl;
+        cin >> ch;
+        len++;
+    } while (ch == 'Y'); 
+    return len;
+}
+
+void marklist::disp() {
+    node* p;
+    p = head;
+    cout << "ROLL NO"
+         << "\t\t"
+         << "Marks" << endl;
+    while (p != NULL) { 
+        cout << p->roll_no << "\t\t" << p->marks << endl;
+        p = p->next;
+    }
+}
+void marklist :: sort(int count)
+{
+    node **h;
+    int i,j,swapped;
+    for(i=0;i<count<<i++){
+        h=&(head);
+        swapped=0;}
+        for(j=0;)
+
+    }
+    
+    for
+}
+
+int main() {
+    marklist l1, l2; 
+
+    cout << "Creating marklist l1" << endl;
+    int len1 = l1.create();
+
+    cout << "Displaying marklist l1" << endl;
+    l1.disp();
+
+    cout << "Creating marklist l2" << endl;
+    int len2 = l2.create();
+
+    cout << "Displaying marklist l2" << endl;
+    l2.disp();
+
+    return 0;
+}
