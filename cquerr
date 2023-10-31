@@ -1,0 +1,17 @@
+#include<iostream>
+using namespace std;
+
+class Que{
+	public:
+		int data[50];
+		int front, rear;
+		
+		Que(){
+			front=rear=-1;
+		}
+};
+
+int main(){
+	
+	return 0;
+}
