@@ -1,0 +1,322 @@
+#include <iostream>
+#include <cstring>
+#include <cmath>
+using namespace std;
+
+#define size 25
+#define max 25
+
+class Stack
+{
+public:
+    string s[size];
+    int top;
+    Stack()
+    {
+        top = -1;
+    }
+    bool isEmpty();
+    bool isFull();
+    void push(string str);
+    string pop();
+};
+
+class Expression
+{
+public:
+    string infix, prefix, postfix;
+    Stack stk;
+
+    void prefix_to_infix();
+    void infix_to_postfix();
+    bool isOperator(char X);
+    int precedence(string x);
+    void postfix_eval();
+};
+
+class stack2
+{
+public:
+    int top;
+    int stk[max];
+
+    stack2()
+    {
+        top = -1;
+    }
+
+    void push(int x);
+    int pop();
+    
+};
+
+void stack2::push(int x)
+{
+    if (top == max - 1)
+        cout << "Stack is Full" << endl;
+    else
+    {
+        top++;
+        stk[top] = x;
+    }
+}
+
+int stack2::pop()
+{
+    if (top == -1)
+    {
+        cout << "Stack is Empty !" << endl;
+        return 0;
+    }
+    else
+    {
+        int x = stk[top];
+        top--;
+        return x;
+    }
+}
+
+void Expression ::  postfix_eval()
+{
+    stack2 stk;
+    string postfix;
+    cout << "Enter postfix expression : " << endl;
+    cin.ignore();
+    getline(cin,postfix);
+
+    int len = postfix.length();
+    
+    for (int i = 0; i < len; i++)
+    {
+        if (postfix[i] == ' ')
+            continue;
+        else if (isdigit(postfix[i]))
+        {
+            int num = 0;
+            while (isdigit(postfix[i]))
+            {
+                num = num * 10 + (postfix[i] - '0');
+                i++;
+            }
+            i--;
+            stk.push(num);
+        }
+        else 
+        {
+            int y = stk.pop();
+            int x = stk.pop();
+            int result;
+            switch (postfix[i])
+            {
+            case '+':
+                result = x + y;
+                stk.push(result);
+                break;
+            case '-':
+                result = x - y;
+                stk.push(result);
+                break;
+            case '*':
+                result = x * y;
+                stk.push(result);
+                break;
+            case '/':
+                if (y != 0)
+                {
+                    result = x / y;
+                    stk.push(result);
+                }
+                else
+                {
+                    cout << "Error : Division by zero " << endl;
+                    return;
+                }
+                break;
+            default:
+                cout << "Error :  Invalid operator" << endl;
+                return;
+            }
+        }
+    }
+    cout<<"Value of postfix Expression is : "<<stk.pop();
+}
+
+bool Expression::isOperator(char X)
+{
+    if (X == '+' || X == '-' || X == '*' || X == '/')
+        return true;
+    else
+        return false;
+}
+
+void Expression::prefix_to_infix()
+{
+    cout << "Enter Expression: " << endl;
+    cin.ignore();
+    getline(cin,prefix);
+
+    int count = prefix.length();
+
+    for (int i = count - 1; i >= 0; i--) {
+        if (isOperator(prefix[i])) {
+            string op1 = stk.pop();
+            string op2 = stk.pop();
+
+            string temp = "(" + op1 + prefix[i] + op2 + ")";
+            stk.push(temp);
+        } else {
+            stk.push(string(1, prefix[i]));
+        }
+    }
+    if (!stk.isEmpty()) {
+        cout << "Infix Expression: " << stk.pop() << endl;
+    } else {
+        cout << "Invalid prefix expression." << endl;
+    }
+}
+
+int Expression::precedence(string x)
+{
+    if (x == "^")
+        return 3;
+    else if (x == "*" || x == "/")
+        return 2;
+    else if (x == "+" || x == "-")
+        return 1;
+    else
+        return 0;
+}
+
+void Expression::infix_to_postfix()
+{
+    string temp;
+
+    cout << "Enter an Infix string: ";
+    cin.ignore();
+    getline(cin,infix);
+    int length = infix.length();
+    for (int i = 0; i < length; i++)
+    {
+        if (infix[i] == '(')
+        {
+            stk.push(string(1, infix[i]));
+        }
+        else if (infix[i] == ')')
+        {
+            do
+            {
+                temp = stk.pop();
+                postfix = postfix + temp;
+            } while (temp != "(");
+        }
+        else if (isOperator(infix[i]))
+        {
+            if (precedence(string(1, infix[i])) > precedence(stk.s[stk.top]))
+            {
+                stk.push(string(1, infix[i]));
+            }
+            else
+            {
+                temp = stk.pop();
+                postfix = postfix + temp;
+                stk.push(string(1, infix[i]));
+            }
+        }
+        else
+        {
+            temp = infix[i];
+            postfix = postfix + temp;
+        }
+    }
+}
+
+bool Stack::isEmpty()
+{
+    if (top == -1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool Stack::isFull()
+{
+    if (top == size - 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void Stack::push(string str)
+{
+    if (isFull())
+    {
+        cout << "Stack is Full!" << endl;
+    }
+    else
+    {
+        top++;
+        s[top] = str;
+    }
+}
+
+string Stack::pop()
+{
+    if (isEmpty())
+    {
+        cout << "Stack is Empty!" << endl;
+        return "";
+    }
+    else
+    {
+        string str = s[top];
+        top--;
+        return str;
+    }
+}
+
+int main()
+{
+    Expression S1;
+    stack2 S2;
+    int choice;
+
+    while (true)
+    {
+        cout << "\n Menu:" << endl;
+        cout << "1. Prefix->Infix" << endl;
+        cout << "2. Infix->Postfix" << endl;
+        cout << "3. Postfix evaluation" << endl;
+        cout << "4. Quit" << endl;
+        cout << "\n Enter your choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+        case 1:
+            S1.prefix_to_infix();
+            cout << "Infix Expression: " << S1.postfix << endl;
+            break;
+        case 2:
+            S1.infix_to_postfix();
+            cout << "Postfix Expression: " << S1.postfix << endl;
+            break;
+        case 3:
+            S1.postfix_eval();
+            cout << "Postfix Evaluation: " << S1.postfix << endl;
+            break;
+        case 4:
+            return 0;
+        default:
+            cout << "Invalid choice. Please try again." << endl;
+        }
+    }
+    return 0;
+}
