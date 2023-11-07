@@ -1,0 +1,222 @@
+#include<iostream>
+
+using namespace std;
+
+class node{
+	public:
+		char item[50];
+		int qty;
+		float price;
+		node *next, *prev;
+		
+};
+
+class irdque{
+	public:
+		node *front, *rear;
+		
+		irdque(){
+			front=rear=NULL;
+		}
+		void enque_rear();
+		void deque_front();
+		void deque_rear();
+		void disp();
+};
+
+class ordque{
+	public:
+		node *front, *rear;
+		
+		ordque(){
+			front=rear=NULL;
+		}
+		void enque_rear();
+		void enque_front();
+		void deque_front();
+		void disp();
+};
+
+void irdque::enque_rear(){
+	node *temp;
+	temp = new node;
+	cout<<"Enter Item name"<<endl;
+	cin>>temp->item;
+	cout<<"Enter quantity"<<endl;
+	cin>>temp->qty;
+	cout<<"Enter price"<<endl;
+	cin>>temp->price;
+	temp->next=NULL;
+	temp->prev=NULL;
+	if(rear==NULL){
+		rear=temp;
+		front=temp;
+	}
+	else{
+		rear->next=temp;
+		temp->prev=rear;
+		rear=temp;
+	}
+}
+
+void irdque::deque_rear(){
+	node *temp = rear;
+	if(front==rear){
+		front=rear=NULL;
+		
+	}
+	else{
+		rear=rear->prev;
+		rear->next=NULL;
+	}
+	delete temp;
+}
+
+void irdque::deque_front(){
+	node *temp = front;
+	if(front==rear){
+		front=rear=NULL;
+		
+	}
+	else{
+		front=front->next;
+		front->prev=NULL;
+	}
+	delete temp;
+}
+
+void ordque::deque_front(){
+	node *temp = front;
+	if(front==rear){
+		front=rear=NULL;
+		
+	}
+	else{
+		front=front->next;
+		front->prev=NULL;
+	}
+	delete temp;
+}
+
+void ordque::enque_front(){
+	node *temp;
+	temp = new node;
+	cout<<"Enter Item name"<<endl;
+	cin>>temp->item;
+	cout<<"Enter quantity"<<endl;
+	cin>>temp->qty;
+	cout<<"Enter price"<<endl;
+	cin>>temp->price;
+	temp->next=NULL;
+	temp->prev=NULL;
+	if(rear==NULL){
+		rear=temp;
+		front=temp;
+	}
+	else{
+		temp->next=front;
+		front->prev=temp;
+		front=temp;
+	}
+}
+
+void ordque::enque_rear(){
+	node *temp;
+	temp = new node;
+	cout<<"Enter Item name"<<endl;
+	cin>>temp->item;
+	cout<<"Enter quantity"<<endl;
+	cin>>temp->qty;
+	cout<<"Enter price"<<endl;
+	cin>>temp->price;
+	temp->next=NULL;
+	temp->prev=NULL;
+	if(rear==NULL){
+		rear=temp;
+		front=temp;
+	}
+	else{
+		rear->next=temp;
+		temp->prev=rear;
+		rear=temp;
+	}
+}
+
+void irdque::disp(){
+	node *temp = front;
+	while(temp!=NULL){
+		cout<<"Item name"<<temp->item<<endl;
+		cout<<"Quantity "<<temp->qty<<endl;
+		cout<<"Price"<<temp->price<<endl;
+		temp=temp->next;	
+	}
+}
+
+void ordque::disp(){
+	node *temp = front;
+	while(temp!=NULL){
+		cout<<"Item name"<<temp->item<<endl;
+		cout<<"Quantity "<<temp->qty<<endl;
+		cout<<"Price"<<temp->price<<endl;
+		temp=temp->next;	
+	}
+}
+
+int main(){
+	irdque q1;
+	ordque q2;
+	int choice;
+	char ch;
+	do{
+	cout<<"Enter your choice:\n1.Input restricted dque\n2.Output restricted dque"<<endl;
+	cin>>choice;
+	switch (choice){
+		case 1:
+			int c1;
+			cout<<"Enter your choice:\n1.Enque from rear\n2.Deque from front\n3.Deque from rear"<<endl;
+			cin>>c1;
+			switch(c1){
+				case 1:
+					q1.enque_rear();
+					q1.disp();
+					break;
+				case 2:
+					q1.deque_front();
+					q1.disp();
+					break;
+				case 3:
+					q1.deque_rear();
+					q1.disp();
+					break;
+				default:
+					cout<<"Invalid choice"<<endl;
+			}
+			break;
+		case 2:
+			int c2;
+			cout<<"Enter your choice:\n1.Enque from rear\n2.Enque from front\n3.Deque from front\n"<<endl;
+			cin>>c2;
+			switch(c2){
+				case 1:
+					q2.enque_rear();
+					q2.disp();
+					break;
+				case 2:
+					q2.enque_front();
+					q2.disp();
+					break;
+				case 3:
+					q2.deque_front();
+					q2.disp();
+					break;
+				default:
+					cout<<"Invalid choice"<<endl;
+			}
+			break;
+		
+	}cout<<"Do you want to perform any other operation (Y/N)"<<endl;
+	cin>>ch; 
+}while(ch=='Y');
+	
+	return 0;
+}
