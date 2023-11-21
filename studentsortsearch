@@ -1,0 +1,137 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+class student{
+	public:
+		int roll_no;
+		char name[50];
+		float SGPA;
+		char dept[50];
+		
+		void getinfo();
+		void print();
+};
+
+void student::getinfo(){
+	cout<<"Enter the roll no:"<<endl;
+    cin>>roll_no;
+    cout<<"Enter the name of student:"<<endl;
+    cin>>name;
+    cout<<"Enter SGPA scored:"<<endl;
+    cin>>SGPA;
+    cout<<"Enter the department of student:"<<endl;
+    cin>>dept;
+}
+
+void student::print(){
+	cout<<roll_no<<"\t"<<name<<"\t"<<SGPA<<"\t"<<dept<<endl;
+}
+
+void bubble_sort(student arr[], int n){
+    student tmp;
+    
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < (n-i-1); j++){
+            if(arr[j].roll_no > arr[j+1].roll_no){
+                tmp = arr[j+1];
+                arr[j+1] = arr[j];
+                arr[j] = tmp;
+            }
+        }
+    }
+}
+
+void insertion_sort(student arr[], int n){
+	char key[50];
+	for(int i = 1; i<n; i++){
+		strcpy(key,arr[i].name);
+		int j=i-1;
+		while((strcmp(key,arr[j].name))<0 && j>=0){
+			arr[j+1]=arr[j];
+			--j;
+		}
+		arr[j+1]=arr[i];
+	}
+}
+
+int main(){
+	int n, ch;
+	char cho;
+	student s[20];
+	cout<<"Enter no. of entries:"<<endl;
+	cin>>n;
+
+	for(int i=0; i<n; i++){
+		s[i].getinfo();
+	}
+
+	cout<<"Unsorted list"<<endl;
+	cout<<"Rollno\t Name\t SGPA\t Department"<<endl;
+	for(int i=0; i<n; i++){
+		s[i].print();
+	}
+	do{
+	cout<<"Enter your choice:\n1.Sort\n2.Search"<<endl;
+	cin>>ch;
+	
+	switch(ch){
+		case 1:
+			int choice;
+			cout<<"Enter your choice:\n1.Bubble sort\n2.insertion sort\n3.Quick sort"<<endl;
+			cin>>choice;
+			
+			switch(choice){
+				case 1:
+				    bubble_sort(s,n);
+	
+	                cout<<"Sorted list"<<endl;
+	                cout<<"Rollno\t Name\t SGPA\t Department"<<endl;
+	                for(int i=0; i<n; i++){
+		                s[i].print();
+	                }
+	                break;
+	            
+	            case 2:
+	            	insertion_sort(s,n);
+	            	
+	            	cout<<"Sorted list"<<endl;
+	            	cout<<"Rollno\t Name\t SGPA\t Department"<<endl;
+	            	for(int i=0; i<n; i++){
+	            		s[i].print();
+	            	}	            	
+	            	break;
+	            
+	            case 3:
+	            	
+	            	
+	            	break;
+	        }
+	        break;
+	    case 2:
+	    	int c;
+	    	cout<<"Enter your choice:\n1.Linear search\n2.Binary search\n3.Fibonacci search"<<endl;
+	    	cin>>c;
+	    	
+	    	switch(c){
+	    		case 1:
+	    			
+	    			break;
+	    		
+	    		case 2:
+	    			
+	    			break;
+	    			
+	    		case 3:
+	    			
+	    			break;
+			}		
+	}
+	cout<<"Do you want to perform any other operation: (Y/N)"<<endl;
+	cin>>cho;
+	}while(cho=='Y');	
+}
+
+
+
+
