@@ -43,11 +43,11 @@ void bubble_sort(student arr[], int n){
 }
 
 void insertion_sort(student arr[], int n){
-	char key[50];
+	student key[50];
 	for(int i = 1; i<n; i++){
-		strcpy(key,arr[i].name);
+		key=arr[i];
 		int j=i-1;
-		while((strcmp(key,arr[j].name))<0 && j>=0){
+		while(key.name<arr[j].name && j>=0){
 			arr[j+1]=arr[j];
 			--j;
 		}
