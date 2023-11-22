@@ -43,7 +43,7 @@ void bubble_sort(student arr[], int n){
 }
 
 void insertion_sort(student arr[], int n){
-	student key[50];
+	student key;
 	for(int i = 1; i<n; i++){
 		key=arr[i];
 		int j=i-1;
@@ -52,6 +52,46 @@ void insertion_sort(student arr[], int n){
 			--j;
 		}
 		arr[j+1]=arr[i];
+	}
+}
+
+int partition(student arr[], int low, int high){
+	float pivot=arr[low].SGPA;
+	int k=high;
+	student tmp;
+	for(int i=high; i>=low; i--){
+		if(arr[i].SGPA>pivot){
+			tmp=arr[i];
+			arr[i]=arr[k];
+			arr[k]=tmp;
+			k--;
+		}
+	}
+	tmp=arr[low];
+	arr[low]=arr[k];
+	arr[k]=tmp;
+	return k;
+}
+
+void quick_sort(student arr[], int low, int high){
+	if(low<high){
+		int pi = partition(arr,low,high);
+		
+		quick_sort(arr, low, pi-1);
+		quick_sort(arr, pi+1, high);
+	}
+}
+
+void linear_search(student arr[], int n, float key){
+	bool flag=false;
+	for(int i=0; i<n; i++){
+		if(key==arr[i].SGPA){
+			cout<<"Roll no. of searched SGPA: "<<arr[i].roll_no<<endl;
+			flag=true;
+		}
+		if(flag==false){
+			cout<<"Element not found"<<endl;
+		}
 	}
 }
 
@@ -103,9 +143,15 @@ int main(){
 	            	break;
 	            
 	            case 3:
+	            	quick_sort(s,0,n-1);
 	            	
-	            	
-	            	break;
+	            	cout<<"Sorted list"<<endl;
+	            	cout<<"Rollno\t Name\t SGPA\t Department"<<endl;
+	            	for(int i=0; i<n; i++){
+	            		s[i].print();
+					}
+					
+					break;	            	
 	        }
 	        break;
 	    case 2:
@@ -115,7 +161,7 @@ int main(){
 	    	
 	    	switch(c){
 	    		case 1:
-	    			
+	    			linear_search(s,n,8.4);
 	    			break;
 	    		
 	    		case 2:
@@ -131,7 +177,3 @@ int main(){
 	cin>>cho;
 	}while(cho=='Y');	
 }
-
-
-
-
