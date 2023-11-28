@@ -51,7 +51,7 @@ void insertion_sort(student arr[], int n){
 			arr[j+1]=arr[j];
 			--j;
 		}
-		arr[j+1]=arr[i];
+		arr[j+1]=key;
 	}
 }
 
@@ -88,12 +88,38 @@ void linear_search(student arr[], int n, float key){
 		if(key==arr[i].SGPA){
 			cout<<"Roll no. of searched SGPA: "<<arr[i].roll_no<<endl;
 			flag=true;
-		}
-		if(flag==false){
+		}	
+	}
+	if(flag==false){
 			cout<<"Element not found"<<endl;
 		}
-	}
 }
+
+int binary_search(student s[], int n, char key[50]){
+   
+    int mid, low, high;
+    low = 0;
+    high = n - 1;
+    mid = (low + high) / 2;
+   
+    while(low <= high){
+        if(key == s[mid].name){
+            return mid;
+        }
+        else if(key < s[mid].name){
+            high = mid - 1;
+            mid = (low + high) / 2;
+        }
+        else{
+            low = mid + 1;
+            mid = (low + high) / 2;
+        }
+    }
+   
+    return false;
+}
+
+
 
 int main(){
 	int n, ch;
@@ -161,11 +187,22 @@ int main(){
 	    	
 	    	switch(c){
 	    		case 1:
-	    			linear_search(s,n,8.4);
+	    			float x;
+	    			cout<<"Enter SGPA to be searched: "<<endl;
+	    			cin>>x;
+	    			linear_search(s,n,x);
 	    			break;
 	    		
 	    		case 2:
-	    			
+	    			int result;
+	    			char sname[50];
+	    			cout<<"Enter roll no you want to search: "<<endl;
+	    			cin>>sname;
+	    			insertion_sort(s,n);
+	    			result=binary_search(s, n, sname);
+	    			if(result){
+	    				cout<<"Name "<<sname<<" has roll no "<<s[result].roll_no<<endl;
+					}
 	    			break;
 	    			
 	    		case 3:
