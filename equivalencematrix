@@ -1,0 +1,50 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+bool isEquivalenceMatrix(const vector<vector<int> >& matrix) {
+    int rows = matrix.size();
+    
+    if (rows != matrix[0].size()) {
+        return false;
+    }
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = i + 1; j < rows; ++j) {
+            if (matrix[i][j] != matrix[j][i]) {
+                return false;
+            }
+        }
+    }
+
+    for (int i = 0; i < rows; ++i) {
+        if (matrix[i][i] != 1) {
+            return false;
+        }
+    }
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < rows; ++j) {
+            if (matrix[i][j] != 0 && matrix[i][j] != 1) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+int main() {
+    vector<vector<int> > matrix = {
+        {1, 0, 0},
+        {0, 1, 1},
+        {0, 1, 1}
+    };
+
+    if (isEquivalenceMatrix(matrix)) {
+        cout << "Given matrix is an equivalence matrix" << endl;
+    } else {
+        cout << "Given matrix is not an equivalence matrix" << endl;
+    }
+    return 0;
+}
