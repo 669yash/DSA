@@ -167,15 +167,15 @@ cin>>ch;
 }
 
 /*Output:
-Enter the no. of elements in Set 1: 5
-Enter the elements in Set 1: 4 6 8 1 2
+Enter the no. of elements in Set 1: 4
+Enter the elements in Set 1: 1 2 3 5
 
-Set 1: 4 6 8 1 2
+Set 1: 1 2 3 5
 
-Enter the no. of elements in Set 2: 5
-Enter the elements in Set 2: 1 2 3 4 5
+Enter the no. of elements in Set 2: 4
+Enter the elements in Set 2: 3 5 7 8
 
-Set 2: 1 2 3 4 5
+Set 2: 3 5 7 8
 
 Select operation from below:
 1. Union
@@ -183,7 +183,7 @@ Select operation from below:
 3. Difference
 4. Symmetric Difference
 1
-Union: 1 2 3 4 5 6 8 1 2
+Union: 1 2 3 5 7 8
 Do you want to perform any other operation: (y/n)
 y
 Select operation from below:
@@ -192,7 +192,7 @@ Select operation from below:
 3. Difference
 4. Symmetric Difference
 2
-Intersection: 4
+Intersection: 3 5
 Do you want to perform any other operation: (y/n)
 y
 Select operation from below:
@@ -201,7 +201,7 @@ Select operation from below:
 3. Difference
 4. Symmetric Difference
 3
-Difference: 6 8 1 2
+Difference: 1 2
 Do you want to perform any other operation: (y/n)
 y
 Select operation from below:
@@ -210,12 +210,12 @@ Select operation from below:
 3. Difference
 4. Symmetric Difference
 4
-Symmetric Difference: 1 2 3 5 6 8 1 2
+Symmetric Difference: 1 2 7 8
 Do you want to perform any other operation: (y/n)
 n
 
 --------------------------------
-Process exited after 55.93 seconds with return value 0
+Process exited after 47.2 seconds with return value 0
 Press any key to continue . . .
 */
 
