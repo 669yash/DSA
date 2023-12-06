@@ -1,5 +1,4 @@
 #include <iostream>
-
 using namespace std;
 
 void find_union(int arr1[], int size1, int arr2[], int size2) {
@@ -91,23 +90,132 @@ void find_symmetric_difference(int arr1[], int size1, int arr2[], int size2) {
 }
 
 int main() {
-    int arr1[] = {1, 2, 3, 4, 5};
-    int size1 = sizeof(arr1) / sizeof(arr1[0]);
+int s1, s2, choice;
+char ch;
 
-    int arr2[] = {3, 4, 5, 6, 7};
-    int size2 = sizeof(arr2) / sizeof(arr2[0]);
 
-    cout << "Union: ";
-    find_union(arr1, size1, arr2, size2);
+cout<<"Enter the no. of elements in Set 1: ";
+cin>>s1;
+int arr1[s1];
+cout<<"Enter the elements in Set 1: ";
+for(int i=0 ; i < s1; i++){
+cin>>arr1[i];
+}
+cout<<endl;
+cout<<"Set 1: ";
+for(int i=0 ; i < s1; i++){
+cout<<arr1[i]<<" ";
+}
+cout<<"\n"<<endl;
 
-    cout << "Intersection: ";
-    find_intersection(arr1, size1, arr2, size2);
 
-    cout << "Difference: ";
-    find_difference(arr1, size1, arr2, size2);
 
-    cout << "Symmetric Difference: ";
-    find_symmetric_difference(arr1, size1, arr2, size2);
+cout<<"Enter the no. of elements in Set 2: ";
+cin>>s2;
+int arr2[s2];
+cout<<"Enter the elements in Set 2: ";
+for(int i=0 ; i < s2; i++){
+cin>>arr2[i];
+}
+cout<<endl;
+cout<<"Set 2: ";
+for(int i=0 ; i < s2; i++){
+cout<<arr2[i]<<" ";
+}
+cout<<"\n"<<endl;
+
+
+    do{
+        cout<<"Select operation from below: \n";
+        cout<<"1. Union\n";
+        cout<<"2. Intersection\n";
+        cout<<"3. Difference\n";
+        cout<<"4. Symmetric Difference\n";
+        cin>>choice;
+       
+        switch(choice){
+            case 1:
+   cout << "Union: ";
+   find_union(arr1, s1, arr2, s2);
+                break;
+               
+            case 2:
+   cout << "Intersection: ";
+   find_intersection(arr1, s1, arr2, s2);
+                break;
+               
+            case 3:
+   cout << "Difference: ";
+   find_difference(arr1, s1, arr2, s2);
+                break;
+               
+            case 4:
+   cout << "Symmetric Difference: ";
+   find_symmetric_difference(arr1, s1, arr2, s2);
+                break;
+               
+            default:
+                cout<<"Invalid Choice !!!"<<endl;
+                break;
+        }
+        cout<<"Do you want to perform any other operation: (y/n)"<<endl;
+cin>>ch;
+}while(ch =='y');
+   
 
     return 0;
 }
+
+/*Output:
+Enter the no. of elements in Set 1: 5
+Enter the elements in Set 1: 4 6 8 1 2
+
+Set 1: 4 6 8 1 2
+
+Enter the no. of elements in Set 2: 5
+Enter the elements in Set 2: 1 2 3 4 5
+
+Set 2: 1 2 3 4 5
+
+Select operation from below:
+1. Union
+2. Intersection
+3. Difference
+4. Symmetric Difference
+1
+Union: 1 2 3 4 5 6 8 1 2
+Do you want to perform any other operation: (y/n)
+y
+Select operation from below:
+1. Union
+2. Intersection
+3. Difference
+4. Symmetric Difference
+2
+Intersection: 4
+Do you want to perform any other operation: (y/n)
+y
+Select operation from below:
+1. Union
+2. Intersection
+3. Difference
+4. Symmetric Difference
+3
+Difference: 6 8 1 2
+Do you want to perform any other operation: (y/n)
+y
+Select operation from below:
+1. Union
+2. Intersection
+3. Difference
+4. Symmetric Difference
+4
+Symmetric Difference: 1 2 3 5 6 8 1 2
+Do you want to perform any other operation: (y/n)
+n
+
+--------------------------------
+Process exited after 55.93 seconds with return value 0
+Press any key to continue . . .
+*/
+
